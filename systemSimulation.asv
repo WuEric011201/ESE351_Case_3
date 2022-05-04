@@ -42,22 +42,21 @@ function [] = systemSimulation(m, b, k, v, roads)
     title('roadSin simulation');
     subplot(4,1,3), plot(x,roads(:,3),x,lsim(n,d,roads(:,3),t)+0.5);
     title('roadPothole simulation');
-    subplot(4,1,4), plot(x,roads(:,4),x,lsim(n,d,roads(:,4),t)+0.5);
+    subplot(4,1,4), plot(x,roads(:,4),x,lsim(n,d,roads(:,3),t)+0.5);
     title('roadPothole simulation');
 
     for i = 1:4
-        subplot(4,1,i);
+        subplot(3,1,i);
         legend('u(t)','y(t)');
         xlabel('time t (s)');
         ylabel('amplitude (m)');
     end 
-    hold off
 
 
 %     Animate Car
     figure; 
-    r = roads(:,  2); 
-    y = lsim(n,d,roads(:,2),t); 
+    r = roads(:,  1); 
+    y = lsim(n,d,roads(:,1),t); 
     animateCar(y, r, v, dt, T);
 
 end

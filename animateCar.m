@@ -1,10 +1,11 @@
-function animateCar(y, r, v, dt, T)
 % function to animate the car 
 % y - car body displacement, vs. time
 % r - road surface, vs. time
 % v - speed (m/s)
 % dt - sampling period in time waveform
 % T - total duration of time waveform
+
+function animateCar(y, r, v, dt, T)
 
 hold on
 % animate from 10 m to end length
@@ -23,7 +24,7 @@ function drawFrame(y, r, t, v, dt)
     cla
     
     %Compute positions of frame objects
-    backLocSample = max(round(t-5/(v*dt))); % sample location for back wheel
+    backLocSample = max(round(t - 5/(v*dt))); % sample location for back wheel
     backwheelY = r(backLocSample,1)+.25; % height of back wheel 
     backbodyY = .75+y(backLocSample,1); % height of body, back
     frontwheelY = r(t)+.25; % height of front wheel

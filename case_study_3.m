@@ -12,7 +12,7 @@ v = 5; % velocity
 b = 5000; % damping coefficient
 
 % different simulated roads
-roads = cat(2, roadTrap, roadSin, roadPothole);
+roads = cat(2, roadTrap, roadSin, roadPothole, inverse_trap);
 
 % simulation and plots
 systemSimulation(m_vehicle+m_load, b, k, v, roads);

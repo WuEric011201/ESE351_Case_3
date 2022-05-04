@@ -1,4 +1,4 @@
-% Generate road surface
+%% Generate road surface
 
 totalDist = 50; % simulation distance in m
 v = 10;         % Vehicle speed in m/s, between 5 and 30 m/s
@@ -13,7 +13,8 @@ t = x/v; % Time vector
 dt = dx/v; % simulation interval in seconds
 T = totalDist/v;    % Simulation length in seconds
 
-surfModel = 'speed'; % 'pothole' 'speed' or 'trapBump'
+surfModel = 'inverse_trap'; % 'pothole' 'speed' or 'trapBump' or 'inverse_trap'
+
 if strcmp(surfModel,'pothole')
     
     % random road surface with potholes
@@ -54,5 +55,18 @@ elseif strcmp(surfModel,'speed') % gridded road surface
     roadSurface = rippleHeight*sin(2*pi*x/spDist);
     roadSurface(x<10) = 0;
     roadSurface(x>totalDist-10) = 0;
-    
+
+elseif strcmp(surfModel, 'inverse_trap')
+
+    roadSurface = zeros(N,1);
+    bmpStart = 15; rampUp = 5; rampLength = 25;
+    bmpEnd = bmpStart + rampLength;
+    rampAmp = -.5;
+    rampUpDur = find(x>bmpStart & x <= bmpStart + rampUp);
+    roadSurface(rampUpDur) = rampAmp*(0:1/length(rampUpDur):1-1/length(rampUpDur));
+    roadSurface(x>=bmpStart+rampUp & x<=bmpEnd-rampUp)=rampAmp;
+    rampDownDur = find(x>bmpEnd-rampUp & x<bmpEnd);
+    roadSurface(rampDownDur) = rampAmp*(1-1/length(rampUpDur):-1/length(rampDownDur):0);
+    inverse_trap = roadSurface; 
+    save("RoadSurfaceSamples.mat", "inverse_trap", '-append'); 
 end
