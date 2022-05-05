@@ -26,7 +26,8 @@ function [] = systemSimulation(m, b, k, v, roads)
     % frequency response
     natural_freq = sqrt(k/m);
     damping_ratio = b/m/2/natural_freq;
-    [h, w] = freqs(n,d);
+    w = logspace(-2, 4); 
+    [h, w] = freqs(n,d, w);
     subplot(2,3,4), semilogx(w,abs(h));
     title(['abs of frequency response with w_n = ' num2str(natural_freq,4) ' and \xi = ' num2str(damping_ratio,4)]);
     xlabel('frequency (rad/s)'), ylabel('magnitude'); grid on;

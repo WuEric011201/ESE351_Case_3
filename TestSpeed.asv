@@ -1,0 +1,25 @@
+% This function tests the response of the vehicle to different speeds
+
+
+function result = TestSpeed(n, d, t, roads)
+
+    speed = 0: 0.5: 40; % Varying speed
+    result = zeros(length(speed), 4); 
+    for i = length(speed)
+        [~ , sum_diff] = Testing(n, d, t, roads); 
+        result (i, : ) = sum_diff; 
+    end
+
+    figure;
+    subplot(4,1,1), plot(speed, result(: , 1));
+    title('Change in speed affect the response to the trapezoidal bump'), subplot(4,1,1), xlabel('Speed (m/s)'), ylabel('Difference agaist inverse trapezoid (m)');
+    subplot(4,1,2), plot(speed, result(: , 2));
+    title('Change in speed affect the response to the sinusoidal road'), subplot(4,1,i), xlabel('Speed (m/s)'), ylabel('Difference against flat road(m)');
+    subplot(4,1,3), plot(speed, result(: , 3));
+    title('Change in speed affect the response to the pothole road'), subplot(4,1,i), xlabel('Speed (m/s)'), ylabel('Difference against flat road(m)');
+    subplot(4,1,4), plot(speed, result(: , 4));
+    title('Change in speed affect the response to the inverse trapezoidal bump'), subplot(4,1,i), xlabel('Speed (m/s)'), ylabel('Difference agaist inverse trapezoid (m)');
+
+
+end
+
