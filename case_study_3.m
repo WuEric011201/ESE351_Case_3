@@ -10,7 +10,7 @@ k = 5E4; % fixed
 % We choose 1.5 as our cutoff frequency. 
 m_load = 163; % mass of the load 
 
-v = 0.5; % velocity
+v = 40; % velocity
 b = 7501; % damping coefficient
 
 % different simulated roads
